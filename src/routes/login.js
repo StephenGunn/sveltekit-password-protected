@@ -17,18 +17,7 @@ export const post = async request => {
         maxAge: 60 * 60 * 24 * 7 * 1, // 1 week (adjust the last 1 for week)
     })
 
-    let submittedPassword
-
-    // get the password from the request in dev mode (windows)
-    if (import.meta.env.DEV) {
-        submittedPassword = request.body.password
-    }
-
-    // get the password from the request in (netlify)
-    if (import.meta.env.PROD) {
-        let req = JSON.parse(request.body)
-        submittedPassword = req.password
-    }
+    let submittedPassword = request.body.password                           // grab the submitted password out of the request body
 
     try {
         // determine if the password is correct
