@@ -1,8 +1,19 @@
 {
   "name": "password",
   "version": "0.0.1",
+  "author": {
+    "name": "Stephen Gunn",
+    "email": "stephengunn@gmail.com",
+    "url": "https://www.jovianmoon.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StephenGunn/sveltekit-password-protected.git"
+  },
+  "homepage": "https://github.com/StephenGunn/sveltekit-password-protected",
+  "license": "MIT",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev --port 4444",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -11,6 +22,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-cloudflare": "^1.0.0-next.7",
     "@sveltejs/kit": "next",
     "cookie": "^0.4.1",
     "svelte": "^3.44.0",
