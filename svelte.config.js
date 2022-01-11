@@ -9,7 +9,7 @@ const config = {
 
 	kit: {
         target: '#svelte',
-        adapter: cloudflare()
+        adapter: cloudflare(),
         vite: {
             optimizeDeps: {
                 include: ['cookie'],
