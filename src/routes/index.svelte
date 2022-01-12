@@ -1,17 +1,18 @@
 <script context="module">
-    export async function load({session}) {
+    export async function load({session}) {                 // server-side code that runs before the route is rendered
         if (session.authenicated) {                         // check if we're authenticated
             return {
                 status: 302,                                // redirect status
                 redirect: '/dashboard',                     // redirect the user to the dashboard if they have the auth cookie
             }
         }
-        return {}                                           // blank return keeps the route from 404ing
+        return {}                                           // blank object return keeps the route from 404ing
     }
 </script>
 <script>
-    import { session } from "$app/stores"
-    import { goto } from '$app/navigation'
+    import { session } from "$app/stores"                   // import the session store
+    import { goto } from '$app/navigation'                  // impor the goto function for internal app navigation
+    
     let password  = ''                                      // bound to the password input, starts blank
     let error     = false                                   // used to trigger error display if there is an error
     let loggingIn = false                                   // controls the button text
@@ -23,7 +24,7 @@
             const response = await fetch('/login', {        // send our password to our login endpoint.
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     password,                               // use the password as the request body
@@ -33,7 +34,7 @@
             res = data                                      // helper var to break the response data out of the function scope
             if (response.ok) {                              // check for a successful return
                 error = false                               // removes the error state if it were previously activated
-                $session = { authenticated: true}           // set authentication
+                $session = { authenticated: true}           // set authentication in the session store
                 goto('/dashboard')                          // tells the app to load the '/dashboard' route
             } else {
                 error = true

@@ -8,7 +8,8 @@
 </p>
 <p>
     Authentication persists between visits with a cookie. We check for the cookie on every request in
-    hooks.js.
+    hooks.js. You can also use your browser's dev tools to see the cookie in action. If you delete the cookie
+    and hit refresh on this page, the app will take you back to the login screen before any data has loaded.
 </p>
 <h2>Dig Into This Project</h2>
 <ul>

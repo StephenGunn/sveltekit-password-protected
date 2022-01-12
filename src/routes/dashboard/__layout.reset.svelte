@@ -1,26 +1,26 @@
 <script context="module">
-    export async function load({ session }) {
-        if (!session.authenticated) {                   // check if we're authenticated
+    export async function load({ session }) {               // server-side code that runs before the route is rendered
+        if (!session.authenticated) {                       // check if we're authenticated
             return {
-                status: 302,                            // redirect status
-                redirect: '/',                          // if the user doesn't have the auth cookie, send them back to the login page
+                status: 302,                                // redirect status
+                redirect: '/',                              // if the user doesn't have the auth cookie, send them back to the login page
             }
         }
-        return {}                                       // blank return keeps the route from 404ing
+        return {}                                           // blank object return keeps the route from 404ing
     }
 </script>
 <script>
     import { session } from "$app/stores"
     import { goto } from '$app/navigation'
-    import '$lib/style.css'
+    import '$lib/style.css'                                 // include some global styles
     
     const logout = async () => {
-        const response = await fetch('/logout')         // handle logout on the server side to have access to cookies
-        if (response.ok) {                              // check if the logout is accepted
-            $session = { authenicated: false }          // set session auth to false
-            goto('/')                                   // redirect home after logout success
+        const response = await fetch('/logout')             // handle logout on the server side to have access to cookies
+        if (response.ok) {                                  // check if the logout is accepted
+            $session = { authenicated: false }              // set session auth to false
+            goto('/')                                       // redirect home after logout success
         } else {
-            console.error('Error logging out.')         // this is just incase something happens on the backend.
+            console.error('Error logging out.')             // this is just incase something happens on the backend.
         }
     }
 </script>
