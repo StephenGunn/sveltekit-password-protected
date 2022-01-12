@@ -1,6 +1,6 @@
 <script context="module">
     export async function load({session}) {                 // server-side code that runs before the route is rendered
-        if (session.authenicated) {                         // check if we're authenticated
+        if (session.authenticated) {                         // check if we're authenticated
             return {
                 status: 302,                                // redirect status
                 redirect: '/dashboard',                     // redirect the user to the dashboard if they have the auth cookie
