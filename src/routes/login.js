@@ -16,7 +16,7 @@ export const post = async ({ request }) => {
     const securityHash = bcrypt.hashSync(submittedPassword, 5)              // generate a secure hash with 5 rounds of salt added
     
     let tracking = cookie.serialize('auth', securityHash, {                 // build the auth cookie using the cookie package
-        httpOnly: false,
+        httpOnly: true,
         sameSite: true,
         path: '/',
         maxAge: 60 * 60 * 24 * 7 * 1                                        // 1 week (seconds * minutes * hours * days * weeks)
