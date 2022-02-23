@@ -1,5 +1,5 @@
 <script>
-    import '$lib/style.css'                                 // include some global styles
+    import '$lib/style.css'                                 // include our global styles
 </script>
 
 <slot></slot>
