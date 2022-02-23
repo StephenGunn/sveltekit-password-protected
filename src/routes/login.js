@@ -6,18 +6,20 @@ const securityHash = import.meta.env.VITE_SECURITY_HASH                     // t
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
 */
-export const post = async request => {
+export const post = async ({ request }) => {
     let tracking = cookie.serialize('auth', securityHash, {                 // build the auth cookie using the cookie package
         httpOnly: true,
         sameSite: true,
         path: '/',
-        maxAge: 60 * 60 * 24 * 7 * 1                                        // 1 week (adjust the last 1 for week)
+        maxAge: 60 * 60 * 24 * 7 * 1                                        // 1 week (seconds * minutes * hours * days * weeks)
     })
 
-    let submittedPassword = request.body.password                           // grab the submitted password out of the request body (this will break on Netlify)
+    let body = await request.json()                                         // process the request body
+
+    let submittedPassword = body.password                                   // grab the submitted password out of the request body (this will break on Netlify)
     
     try {
-        const password = submittedPassword === setPassword ? true : false   // determine if the password is correct
+        const password = submittedPassword === setPassword                  // determine if the password is correct (boolean)
         
         if (password) {                                                     // check for a correct password
             return {
