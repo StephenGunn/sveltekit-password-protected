@@ -1,21 +1,17 @@
 import cookie from 'cookie'
-import bcrypt from 'bcrypt'
+
 
 const setPassword  = import.meta.env.VITE_PASSWORD                          // password is set in .env and will need to be set locally and on your server
+const setCookie    = import.meta.env.VITE_COOKIE_VALUE                      // cookie value is set in .env
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
 */
 export const post = async ({ request }) => {
+    const body = await request.json()                                       // process the request body
+    const submittedPassword = body.password                                 // grab the submitted password out of the request body (this will break on Netlify)
     
-
-    let body = await request.json()                                         // process the request body
-
-    let submittedPassword = body.password                                   // grab the submitted password out of the request body (this will break on Netlify)
-
-    const securityHash = bcrypt.hashSync(submittedPassword, 5)              // generate a secure hash with 5 rounds of salt added
-    
-    let tracking = cookie.serialize('auth', securityHash, {                 // build the auth cookie using the cookie package
+    let tracking = cookie.serialize('auth', setCookie, {                    // build the auth cookie using the cookie package
         httpOnly: true,
         sameSite: true,
         path: '/',
