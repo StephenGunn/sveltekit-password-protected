@@ -1,6 +1,5 @@
 import cookie from 'cookie'
 
-
 const setPassword  = import.meta.env.VITE_PASSWORD                          // password is set in .env and will need to be set locally and on your server
 const setCookie    = import.meta.env.VITE_COOKIE_VALUE                      // cookie value is set in .env
 
